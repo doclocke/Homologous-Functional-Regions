@@ -109,7 +109,7 @@ for h = 1:length(hemis)
                All_Sub_MatchCost{s} = MatchCost;
         end
         
-        save([OutPath '/Net_' num2str(n+1) '_MatchMatrix_' hemi '.mat'],'All_Sub_MatchMatrix');
+        save('-v7', [OutPath '/Net_' num2str(n+1) '_MatchMatrix_' hemi '.mat'],'All_Sub_MatchMatrix');
         
 %         save([OutPath '/Net_' num2str(n+1) '_MatchMatrix_' hemi '.mat'],'All_Sub_MatchMatrix','All_Sub_MatchCost');
         clear All_Sub_MatchMatrix All_Sub_MatchCost

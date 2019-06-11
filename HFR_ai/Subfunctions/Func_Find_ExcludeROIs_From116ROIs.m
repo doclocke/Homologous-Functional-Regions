@@ -38,7 +38,7 @@ end
 MatchVec = sum(MatchMatrix,2);
 MatchMask = logical(MatchVec>=SubsNum.*MatchRate);
 ConsistentROIsNum = sum(MatchMask);
-save([OutPath '/Matched' num2str(ConsistentROIsNum) 'ROIs_From116ROIs.mat'],'MatchMask');
+save('-v7', [OutPath '/Matched' num2str(ConsistentROIsNum) 'ROIs_From116ROIs.mat'],'MatchMask');
 
 
 

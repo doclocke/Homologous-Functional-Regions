@@ -17,7 +17,12 @@ for r1 = 1:size(corr_mat_big,2)
 
         exclude_sub = find(Grp_edge==0);
         Grp_edge(exclude_sub) = [];
-        edge_mean_Grp(r1,r2) = mean(Grp_edge);
+        if numel(Grp_edge) < 1
+          edge_mean_Grp(r1, r2) = 0;
+        else
+          edge_mean_Grp(r1,r2) = mean(Grp_edge);  
+        endif
+        
 
     end
 end

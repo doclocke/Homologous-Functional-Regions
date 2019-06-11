@@ -74,18 +74,21 @@ for h = 1:length(hemis)
              end
              
              Target_Patches = load_mgh([IndiPatchPath '/' sub '/Network_' num2str(n+1) '_sm1_Patch_' hemi '.mgh']);
+             save('-v7', [OutDir_MatchedIndi '/Net_' num2str(n + 1) '/' sub '/patches_' hemi '.mat'], 'Ref_Patches', 'Selected_Patch', 'Target_Patches');
                          
              MatchMatrix_Onesub = All_Sub_MatchMatrix{s};% Target subject
            
               %% Find the Many-To-One matched patches(Reference-To-Target),Split and Expand
                  tmp = sum(MatchMatrix_Onesub,1);
                  Patches_willsplit = find(tmp>1);
+                 save('-v7', [OutDir_MatchedIndi '/Net_' num2str(n + 1) '/' sub '/patches_willsplit_' hemi '.mat'], 'Patches_willsplit');
                  if ~isempty(Patches_willsplit)
                      for Patches_willsplit_i = 1:length(Patches_willsplit)
                          Patch_willsplit_current = Patches_willsplit(Patches_willsplit_i);
                          Patch_willsplit_Index = find(Target_Patches==Patch_willsplit_current);
 
                          MatchPatch = find(MatchMatrix_Onesub(:,Patch_willsplit_current));
+                         save('-v7', [OutDir_MatchedIndi '/Net_' num2str(n + 1) '/' sub '/match_patch_' num2str(Patch_willsplit_current) '_' hemi '.mat'], 'MatchPatch');
 
                          Patch_all_splited_Index = [];
                          Patch_splited_Index = cell(length(MatchPatch),1);
@@ -125,7 +128,8 @@ for h = 1:length(hemis)
                              save_mgh(PatchMap,[OutDir_MatchedIndi '/Net_' num2str(n+1) '/'...
                                  sub '/Patch_' num2str(Patch_willsplit_current) '_split2Patch' num2str(splited_identity) '_' hemi '.mgh'],eye(4));
 
-                         end
+                       end
+                       save('-v7', [OutDir_MatchedIndi '/Net_' num2str(n + 1) '/' sub '/patch_' num2str(Patch_willsplit_current) '_splited_index_' hemi '.mat'], 'Patch_splited_Index');
                          clear PatchIndex_splited
                      end % Patches_willsplit_i
                      
@@ -195,6 +199,7 @@ for h = 1:length(hemis)
                 end
             end
             PatchNum = unique([Final_PatchNum;Splited_PatchNum]);
+            save('-v7', [OutDir '/Net_' num2str(n + 1) '/' sub '/file_params_' hemi '.mat'], 'files1', 'files2', 'Final_PatchNum', 'Splited_PatchNum', 'PatchNum');
             
             for p = 1:length(PatchNum)
                 PatchNum_current = PatchNum(p);
@@ -249,7 +254,8 @@ for h = 1:length(hemis)
                    
                     save_mgh(FinalMap,[OutDir '/Net_' num2str(n+1) '/' sub '/Patch_' num2str(PatchNum_current) '_' hemi '.mgh'],eye(4)); 
              
-                  end
+                end
+                save('-v7', [OutDir '/Net_' num2str(n+1) '/' sub '/final_map_' num2str(PatchNum_current) '_' hemi '.mat'], 'FinalMap', 'finalPatchIndex');
             end
         end
     end

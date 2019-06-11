@@ -71,13 +71,13 @@ for s = 1:length(SubIDs)
     
     CorrMat = corrcoef(ROIs_sig);%ROIsNum*ROIsNum;
     CorrMat(isnan(CorrMat)) = 0;
-    save([OutPath '/ROI2ROIFC_Indi/' sub '_big_corr.mat'],'CorrMat');
+    save('-v7', [OutPath '/ROI2ROIFC_Indi/' sub '_big_corr.mat'],'CorrMat');
     
     % fisher_z
     CorrMat = atanh(CorrMat);
     CorrMat(isnan(CorrMat)) = 0;
     CorrMat(isinf(CorrMat)) = 0;
-    save([OutPath '/ROI2ROIFC_Indi/' sub '_big_corr_z.mat'],'CorrMat');
+    save('-v7',[OutPath '/ROI2ROIFC_Indi/' sub '_big_corr_z.mat'],'CorrMat');
 end
 
        

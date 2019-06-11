@@ -53,7 +53,7 @@ for s = 1:length(SubIDs)
     
     CorrMat = corrcoef(ROIs_sig);%ROIsNum*ROIsNum;
     CorrMat(isnan(CorrMat)) = 0;
-    save([OutPath '/ROI2ROIFC_Atlas/' sub '_big_corr.mat'],'CorrMat');
+    save('-v7',[OutPath '/ROI2ROIFC_Atlas/' sub '_big_corr.mat'],'CorrMat');
     
     % fisher_z
     CorrMat = atanh(CorrMat);
